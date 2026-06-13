@@ -11,7 +11,7 @@ var _storeObj = {
   transaksi: JSON.parse(JSON.stringify(TRANSAKSI)),
   notifikasi: buatNotifikasi(),
   chatMessages: (function() {
-    let saved = localStorage.getItem('ledgerly_chat_history');
+    const saved = localStorage.getItem('ledgerly_chat_history');
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -24,7 +24,7 @@ var _storeObj = {
     ];
   })(),
   settings: (function() {
-    let saved = localStorage.getItem('ledgerly_settings');
+    const saved = localStorage.getItem('ledgerly_settings');
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -93,13 +93,13 @@ var store = new Proxy(_storeObj, {
 // -- fungsi auth (pake localStorage) --
 function cekLogin() {
   // Cek localStorage untuk data user yang sudah login sebelum nya
-  let userData = localStorage.getItem('ledgerly_user');
+  const userData = localStorage.getItem('ledgerly_user');
   if (userData) {
     store.user = JSON.parse(userData); // simpan data user
     
     // Muat riwayat chat spesifik user
-    let chatKey = dapatkanChatKey(); // function dari utils.js
-    let savedChat = localStorage.getItem(chatKey);
+    const chatKey = dapatkanChatKey(); // function dari utils.js
+    const savedChat = localStorage.getItem(chatKey);
     if (savedChat) {
       try {
         store.chatMessages = JSON.parse(savedChat);
@@ -245,10 +245,10 @@ function hitungRingkasan(hari) {
     totalHpp += data[i].hpp;
     totalPesanan += data[i].pesanan;
   }
-  let labaKotor = totalOmzet - totalHpp;
-  let persenBiaya = (store.settings && store.settings.biayaOpsPersen !== undefined) ? store.settings.biayaOpsPersen : 8;
-  let biayaOps = Math.round(totalOmzet * (persenBiaya / 100));
-  let labaBersih = labaKotor - biayaOps;
+  const labaKotor = totalOmzet - totalHpp;
+  const persenBiaya = (store.settings && store.settings.biayaOpsPersen !== undefined) ? store.settings.biayaOpsPersen : 8;
+  const biayaOps = Math.round(totalOmzet * (persenBiaya / 100));
+  const labaBersih = labaKotor - biayaOps;
   
   return {
     omzet: totalOmzet,
@@ -342,7 +342,7 @@ var halamanSkrg = '#inventaris'; // default
 
 // function untuk pindah css kustom sesuai halaman nya
 function muatStylesHalaman(pageName) {
-  let oldLink = document.getElementById('dynamic-page-stylesheet');
+  const oldLink = document.getElementById('dynamic-page-stylesheet');
   if (oldLink) oldLink.remove(); // hapus link stylesheet lama
 
   // link stylesheet baru untuk halaman nya

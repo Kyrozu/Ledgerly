@@ -26,7 +26,7 @@ async function login(email, password) {
 
       if (data && data.user) {
         // Ambil data profil pengguna dari tabel Users
-        let { data: profil } = await window.supabaseClient
+        const { data: profil } = await window.supabaseClient
           .from('Users')
           .select('*')
           .eq('email', email)
